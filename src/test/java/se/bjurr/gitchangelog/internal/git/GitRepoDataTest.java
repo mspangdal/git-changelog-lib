@@ -89,4 +89,20 @@ public class GitRepoDataTest {
     assertThat(sut.findGitLabServer().orNull()) //
         .isEqualTo("https://gitlab.com/");
   }
+
+  @Test
+  public void testGitLabSubgroupsRepo() {
+    GitRepoData sut =
+        newGitRepoData("http://root@gitlab.com/root/subgroup1/subgroup2/violations-test.git");
+
+    assertThat(sut.findOwnerName().orNull()) //
+        .isEqualTo("root");
+    assertThat(sut.findRepoName().orNull()) //
+        .isEqualTo("subgroup1/subgroup2/violations-test");
+
+    assertThat(sut.findGitHubApi().orNull()) //
+        .isEqualTo(null);
+    assertThat(sut.findGitLabServer().orNull()) //
+        .isEqualTo("https://gitlab.com/");
+  }
 }
